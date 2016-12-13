@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FSS_UGZ_Service.UgzFssService" CodeBehind="UgzFssService.svc.cs" %>
