@@ -166,16 +166,13 @@ namespace FSS_UGZ_Service
     }
        
     // Спецификация
-    [CollectionDataContract(Name = "ContractPaymentSpecDictionary", ItemName = "PaymentSpecification", KeyName = "KBK", ValueName = "PaymentSum")]
+    [CollectionDataContract(Name = "NotificationChangeSpecDictionary", ItemName = "NotificationChangeSpec", KeyName = "CodeKOZ", ValueName = "Specs")]
     public class NotificationChangeSpecDictionary : Dictionary<string, NotificationChangeSpec> { };
 
     // Извещение(изменение)
     [DataContract]
     public class NotificationChangeType
     {
-        //Идентификатор документа в УГЗ
-        string purchaseID;
-
         //Номер закупки
         string purchaseNumber;
 
@@ -224,14 +221,6 @@ namespace FSS_UGZ_Service
         //Спецификация
         NotificationChangeSpecDictionary specs;
         
-        //Идентификатор документа в УГЗ
-        [DataMember(IsRequired = true, Order = 1)]
-        public string PurchaseID
-        {
-            get { return purchaseID; }
-            set { purchaseID = value; }
-        }
-
         //Номер закупки
         [DataMember(IsRequired = true, Order = 2)]
         public string PurchaseNumber
@@ -362,7 +351,7 @@ namespace FSS_UGZ_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "ContractPayments", ItemName = "ContractPayment", KeyName = "BankDocGUID", ValueName = "BankDoc")]
+    [CollectionDataContract(Name = "NotificationChangesType", ItemName = "NotificationChangeType", KeyName = "PurchaseID", ValueName = "NotificationChanges")]
     public class NotificationChangesType : Dictionary<string, NotificationChangeType> { };
 
     #endregion 1. Запрос на передачу извещений (изменений)
