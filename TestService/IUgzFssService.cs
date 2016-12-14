@@ -4,7 +4,7 @@ using System.Net.Security;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace FSS_UGZ_Service
+namespace UGZ_FSS_Service
 {
     [ServiceContract(Namespace = "www.parus.ru", ProtectionLevel = ProtectionLevel.None)]
     public interface IUgzFssService
@@ -164,34 +164,37 @@ namespace FSS_UGZ_Service
             set { sum = value; }
         }
     }
-       
+
     // Спецификация
-    [CollectionDataContract(Name = "NotificationChangeSpecDictionary", ItemName = "NotificationChangeSpec", KeyName = "CodeKOZ", ValueName = "Specs")]
+    [CollectionDataContract(Name = "CustomerRequirements", ItemName = "CustomerRequirement", KeyName = "CodeKOZ", ValueName = "Requirement")]
     public class NotificationChangeSpecDictionary : Dictionary<string, NotificationChangeSpec> { };
 
     // Извещение(изменение)
     [DataContract]
     public class NotificationChangeType
     {
-        //Номер закупки
-        string purchaseNumber;
+        // Код организации - Принадлежность/Заказчик
+        string organizationCode;
 
-        //Документ. Дата
+        // Идентификатор документа в УГЗ
+        string docGUID;
+
+        // Документ. Дата
         DateTime docPublishDate;
 
-        //Описание объекта закупки 
+        // Номер закупки
+        string purchaseNumb;
+
+        // Описание объекта закупки 
         string purchaseObjectInfo;
 
-        //Организация-Принадлежность/Заказчик
-        string regNum;
-
-        //Ссылка для скачивания документов
+        // Ссылка для скачивания документов
         string url;
 
-        //Способ размещения заказа
+        // Способ размещения заказа
         string placingWayCode;
 
-        //Дата проведения аукциона
+        // Дата проведения аукциона
         DateTime biddingDate;
 
         //Номер лота
@@ -220,16 +223,24 @@ namespace FSS_UGZ_Service
 
         //Спецификация
         NotificationChangeSpecDictionary specs;
-        
-        //Номер закупки
-        [DataMember(IsRequired = true, Order = 2)]
-        public string PurchaseNumber
+
+        // Код организации - Принадлежность/Заказчик
+        [DataMember(IsRequired = true, Order = 1)]
+        public string OrganizationCode
         {
-            get { return purchaseNumber; }
-            set { purchaseNumber = value; }
+            get { return organizationCode; }
+            set { organizationCode = value; }
         }
 
-        //Документ. Дата
+        // Идентификатор документа в УГЗ
+        [DataMember(IsRequired = true, Order = 2)]
+        public string DocGUID
+        {
+            get { return docGUID; }
+            set { docGUID = value; }
+        }
+
+        // Документ. Дата
         [DataMember(IsRequired = true, Order = 3)]
         public DateTime DocPublishDate
         {
@@ -237,20 +248,20 @@ namespace FSS_UGZ_Service
             set { docPublishDate = value; }
         }
 
-        //Описание объекта закупки 
+        // Номер закупки
         [DataMember(IsRequired = true, Order = 4)]
+        public string PurchaseNumb
+        {
+            get { return purchaseNumb; }
+            set { purchaseNumb = value; }
+        }
+
+        // Описание объекта закупки 
+        [DataMember(IsRequired = true, Order = 5)]
         public string PurchaseObjectInfo
         {
             get { return purchaseObjectInfo; }
             set { purchaseObjectInfo = value; }
-        }
-
-        //Организация-Принадлежность/Заказчик
-        [DataMember(IsRequired = true, Order = 5)]
-        public string RegNum
-        {
-            get { return regNum; }
-            set { regNum = value; }
         }
 
         //Ссылка для скачивания документов
@@ -351,7 +362,7 @@ namespace FSS_UGZ_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationChangesType", ItemName = "NotificationChangeType", KeyName = "PurchaseID", ValueName = "NotificationChanges")]
+    [CollectionDataContract(Name = "NotificationChanges", ItemName = "NotificationChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationChangesType : Dictionary<string, NotificationChangeType> { };
 
     #endregion 1. Запрос на передачу извещений (изменений)
