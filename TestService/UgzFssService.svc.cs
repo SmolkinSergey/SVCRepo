@@ -15,7 +15,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationEAChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationEAChangesResultsType NotificationEAChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationOKChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationOKChangesResultsType NotificationOKChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationEPChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationEPChangesResultsType NotificationEPChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -45,7 +45,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationOKDChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationOKDChangesResultsType NotificationOKDChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -55,7 +55,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationOKOUChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationOKOUChangesResultsType NotificationOKOUChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationZKChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationZKChangesResultsType NotificationZKChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +75,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType NotificationZPChangesResult(ElectronicInterchangeType ElectronicInterchange)
+        public NotificationZPChangesResultsType NotificationZPChangesResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
@@ -85,7 +85,18 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ProcessingResultsType ContractTransfersResult(ElectronicInterchangeType ElectronicInterchange)
+        public ContractTransferResultsType ContractTransfersResult(ElectronicInterchangeType ElectronicInterchange)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public ElectronicInterchangeType SendCancellationsContract(SendCancellationsContractType ContractPayments)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CancellationsContractResultsType CancellationsContractResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }

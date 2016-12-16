@@ -13,47 +13,48 @@ namespace UGZ_FSS_Service
         [OperationContract]
         ElectronicInterchangeType SendNotificationEAChanges(NotificationEAChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationEAChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationEAChangesResultsType NotificationEAChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.2. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ОК»
         [OperationContract]
         ElectronicInterchangeType SendNotificationOKChanges(NotificationOKChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationOKChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationOKChangesResultsType NotificationOKChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.3. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЕП»
         [OperationContract]
         ElectronicInterchangeType SendNotificationEPChanges(NotificationEPChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationEPChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationEPChangesResultsType NotificationEPChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.4. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении OK-Д»
         [OperationContract]
         ElectronicInterchangeType SendNotificationOKDChanges(NotificationOKDChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationOKDChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationOKDChangesResultsType NotificationOKDChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.5. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении OK-ОУ»
         [OperationContract]
         ElectronicInterchangeType SendNotificationOKOUChanges(NotificationOKOUChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationOKOUChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationOKOUChangesResultsType NotificationOKOUChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.6. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЗК»
         [OperationContract]
         ElectronicInterchangeType SendNotificationZKChanges(NotificationZKChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationZKChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationZKChangesResultsType NotificationZKChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 1.7. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЗП»
         [OperationContract]
         ElectronicInterchangeType SendNotificationZPChanges(NotificationZPChangesType ContractPayments);
         [OperationContract]
-        ProcessingResultsType NotificationZPChangesResult(ElectronicInterchangeType ElectronicInterchange);
+        NotificationZPChangesResultsType NotificationZPChangesResult(ElectronicInterchangeType ElectronicInterchange);
         // 2. Запрос на передачу государственных контрактов
         [OperationContract]
         ElectronicInterchangeType SendContractTransfers(SendContractTransfersType ContractPayments);
         [OperationContract]
-        ProcessingResultsType ContractTransfersResult(ElectronicInterchangeType ElectronicInterchange);
+        ContractTransferResultsType ContractTransfersResult(ElectronicInterchangeType ElectronicInterchange);
         // 3. Запрос на передачу информации о расторжении государственных контрактов
-        //[OperationContract]
-        //ElectronicInterchangeType SendContractTransfers(SendContractTransfersType ContractPayments);
-        //[OperationContract]
-        //ProcessingResultsType ContractTransfersResult(ElectronicInterchangeType ElectronicInterchange);
+        [OperationContract]
+        ElectronicInterchangeType SendCancellationsContract(SendCancellationsContractType ContractPayments);
+        [OperationContract]
+        CancellationsContractResultsType CancellationsContractResult(ElectronicInterchangeType ElectronicInterchange);
+        // 4. Запрос на передачу банковской гарантии (ее изменения)
     }
 
     #region Общие типы
@@ -113,15 +114,11 @@ namespace UGZ_FSS_Service
         }
     }
 
-    [CollectionDataContract(Name = "ProcessingResults",
-                            ItemName = "ContractPayment",
-                            KeyName = "BankDocGUID",
-                            ValueName = "ProcessingStatus")]
-    public class ProcessingResultsType : Dictionary<string, ProcessingStatusType> { };
-
     #endregion Общие типы
 
     #region 1. Атрибуты извещения (изменения)
+
+    #region Варианты спецификаций
 
     // Строка спецификации с суммой
     [DataContract]
@@ -317,8 +314,10 @@ namespace UGZ_FSS_Service
     [CollectionDataContract(Name = "CustomerRequirements", ItemName = "CustomerRequirement", ValueName = "Requirement")]
     public class NotificationChangeSpecWithoutSumDictionary : List<NotificationChangeSpecWithoutSumm> { };
 
+    #endregion Варианты спецификаций
+
     #region 1.1. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЭА»
-    
+
     // Извещение(изменение)
     [DataContract]
     public class NotificationEAChangeType
@@ -492,6 +491,9 @@ namespace UGZ_FSS_Service
     // Коллекция извещений(изменений)
     [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationEAChangesType : Dictionary<string, NotificationEAChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationEAChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.1. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЭА»
 
@@ -668,8 +670,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationOKChanges", ItemName = "NotificationOKChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationOKChangesType : Dictionary<string, NotificationOKChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationOKChanges", ItemName = "NotificationOKChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationOKChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.2. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ОК»
 
@@ -846,8 +851,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationEPChanges", ItemName = "NotificationEPChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationEPChangesType : Dictionary<string, NotificationEPChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationEPChanges", ItemName = "NotificationEPChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationEPChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.3. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЕП»
 
@@ -900,7 +908,7 @@ namespace UGZ_FSS_Service
         string info;
 
         //Спецификация
-        NotificationChangeSpecWithSumDictionary specs;
+        NotificationChangeSpecWithoutSumDictionary specs;
 
         // Номер закупки
         [DataMember(IsRequired = true, Order = 1)]
@@ -1016,7 +1024,7 @@ namespace UGZ_FSS_Service
 
         //Спецификация
         [DataMember(IsRequired = true, Order = 15)]
-        public NotificationChangeSpecWithSumDictionary Specs
+        public NotificationChangeSpecWithoutSumDictionary Specs
         {
             get { return specs; }
             set { specs = value; }
@@ -1024,8 +1032,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationOKDChanges", ItemName = "NotificationOKDChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationOKDChangesType : Dictionary<string, NotificationOKDChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationOKDChanges", ItemName = "NotificationOKDChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationOKDChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.4. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении OK-Д»
 
@@ -1078,7 +1089,7 @@ namespace UGZ_FSS_Service
         string info;
 
         //Спецификация
-        NotificationChangeSpecWithSumDictionary specs;
+        NotificationChangeSpecWithoutSumDictionary specs;
 
         // Номер закупки
         [DataMember(IsRequired = true, Order = 1)]
@@ -1194,7 +1205,7 @@ namespace UGZ_FSS_Service
 
         //Спецификация
         [DataMember(IsRequired = true, Order = 15)]
-        public NotificationChangeSpecWithSumDictionary Specs
+        public NotificationChangeSpecWithoutSumDictionary Specs
         {
             get { return specs; }
             set { specs = value; }
@@ -1202,8 +1213,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationOKOUChanges", ItemName = "NotificationOKOUChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationOKOUChangesType : Dictionary<string, NotificationOKOUChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationOKOUChanges", ItemName = "NotificationOKOUChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationOKOUChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.5. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении OK-ОУ»
 
@@ -1380,8 +1394,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationZKChanges", ItemName = "NotificationZKChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationZKChangesType : Dictionary<string, NotificationZKChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationZKChanges", ItemName = "NotificationZKChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationZKChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.6. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЗК»
 
@@ -1558,8 +1575,11 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция извещений(изменений)
-    [CollectionDataContract(Name = "NotificationEAChanges", ItemName = "NotificationEAChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
+    [CollectionDataContract(Name = "NotificationZPChanges", ItemName = "NotificationZPChange", KeyName = "PurchaseGUID", ValueName = "Purchase")]
     public class NotificationZPChangesType : Dictionary<string, NotificationZPChangeType> { };
+
+    [CollectionDataContract(Name = "NotificationZPChanges", ItemName = "NotificationZPChange", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class NotificationZPChangesResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 1.7. Атрибуты извещения (изменения) – Тип «Проект извещения о проведении ЗП»
 
@@ -2057,12 +2077,159 @@ namespace UGZ_FSS_Service
     }
 
     // Коллекция запросов на передачу государственных контрактов
-    [CollectionDataContract(Name = "ContractTransfers", ItemName = "ContractTransfer", KeyName = "ContractId", ValueName = "ContractTransfer")]
+    [CollectionDataContract(Name = "ContractTransfers", ItemName = "ContractTransfer", KeyName = "ContractGUID", ValueName = "ContractTransfer")]
     public class SendContractTransfersType : Dictionary<string, SendContractTransferType> { };
+
+    [CollectionDataContract(Name = "ContractTransfers", ItemName = "ContractTransfer", KeyName = "PurchaseGUID", ValueName = "ProcessingStatus")]
+    public class ContractTransferResultsType : Dictionary<string, ProcessingStatusType> { };
 
     #endregion 2. Запрос на передачу государственных контрактов
 
     #region 3. Запрос на передачу информации о расторжении государственных контрактов
+
+    // Текущее состояние контракта
+    [DataContract(Name = "CancellationContractStagesEnum")]
+    public enum ContractStagesEnum
+    {
+        // 1 - Исполнение → нет действий
+        [EnumMember]
+        E = 1,
+        // 2 - Исполнение прекращено → в поле «Исполнение. Состояние» - значение «Исполнение прекращено»
+        [EnumMember]
+        ET = 2,
+        // 3 - Исполнение завершено → в поле «Исполнение. Состояние» - значение «Исполнение завершено»
+        [EnumMember]
+        EC = 3,
+        // 4 - Aннулировано → в поле «Исполнение. Состояние» - значение «Aннулировано»
+        [EnumMember]
+        IN = 4
+    }
+
+    [DataContract]
+    public class SendCancellationContractType
+    {
+        // Организация-Принадлежность/Заказчик
+        string regNum;
+
+        // Дата расторжения контракта
+        DateTime cancellationDate;
+
+        // Причина расторжения контракта
+        string cancellationReason;
+
+        // Код в словаре «Основания расторжения контракта»
+        string cancellationReasonCode;
+
+        // Реквизиты документа-основания расторжения контракта
+        string cancelletionDoc;
+
+        // Дата уведомления (судебного решения) о расторжении контракта
+        DateTime decisionDate;
+
+        // Информационное поле
+        ContractStagesEnum currentContractStage;
+
+        // Исполнение. Дата смены состояния
+        DateTime stageChangeDate;
+
+        // Дата окончания обеспечения
+        DateTime guaranteeTermination;
+
+        // Организация-Принадлежность/Заказчик
+        [DataMember(IsRequired = true, Order = 1)]
+        public string RegNum
+        {
+            get { return regNum; }
+            set { regNum = value; }
+        }
+
+        // Дата расторжения контракта
+        [DataMember(IsRequired = false, Order = 2)]
+        public DateTime CancellationDate
+        {
+            get { return cancellationDate; }
+            set { cancellationDate = value; }
+        }
+
+        // Причина расторжения контракта
+        [DataMember(IsRequired = false, Order = 3)]
+        public string CancellationReason
+        {
+            get { return cancellationReason; }
+            set { cancellationReason = value; }
+        }
+
+        // Код в словаре «Основания расторжения контракта»
+        [DataMember(IsRequired = false, Order = 4)]
+        public string CancellationReasonCode
+        {
+            get { return cancellationReasonCode; }
+            set { cancellationReasonCode = value; }
+        }
+
+        // Реквизиты документа-основания расторжения контракта
+        [DataMember(IsRequired = false, Order = 5)]
+        public string CancelletionDoc
+        {
+            get { return cancelletionDoc; }
+            set { cancelletionDoc = value; }
+        }
+
+        // Дата уведомления (судебного решения) о расторжении контракта
+        [DataMember(IsRequired = false, Order = 6)]
+        public DateTime DecisionDate
+        {
+            get { return decisionDate; }
+            set { decisionDate = value; }
+        }
+
+        // Информационное поле
+        [DataMember(IsRequired = false, Order = 7)]
+        public ContractStagesEnum CurrentContractStage
+        {
+            get { return currentContractStage; }
+            set { currentContractStage = value; }
+        }
+
+        // Исполнение. Дата смены состояния
+        [DataMember(IsRequired = false, Order = 8)]
+        public DateTime StageChangeDate
+        {
+            get { return stageChangeDate; }
+            set { stageChangeDate = value; }
+        }
+
+        // Дата окончания обеспечения
+        [DataMember(IsRequired = false, Order = 9)]
+        public DateTime GuaranteeTermination
+        {
+            get { return guaranteeTermination; }
+            set { guaranteeTermination = value; }
+        }
+    }
+
+    // Коллекция запросов на передачу информации о расторжении государственных контрактов
+    [CollectionDataContract(Name = "CancellationsContract", ItemName = "CancellationContract", KeyName = "ContractGUID", ValueName = "CancellationContract")]
+    public class SendCancellationsContractType : Dictionary<string, SendCancellationContractType> { };
+
+    [CollectionDataContract(Name = "CancellationsContract", ItemName = "CancellationContract", KeyName = "ContractGUID", ValueName = "ProcessingStatus")]
+    public class CancellationsContractResultsType : Dictionary<string, ProcessingStatusType> { };
+
     #endregion 3. Запрос на передачу информации о расторжении государственных контрактов
 
+    #region 4. Запрос на передачу банковской гарантии (ее изменения)
+
+    [DataContract]
+    public class SendBankGuaranteeType
+    {
+    }
+
+    // Коллекция запросов на передачу информации о расторжении государственных контрактов
+    [CollectionDataContract(Name = "BankGuarantees", ItemName = "BankGuarantee", KeyName = "bankgarantGUID", ValueName = "BankGuarantee")]
+    public class SendBankGuaranteesType : Dictionary<string, SendBankGuaranteeType> { };
+
+    [CollectionDataContract(Name = "BankGuarantees", ItemName = "BankGuarantee", KeyName = "bankgarantGUID", ValueName = "ProcessingStatus")]
+    public class BankGuaranteesResultsType : Dictionary<string, ProcessingStatusType> { };
+
+    #endregion 4. Запрос на передачу банковской гарантии (ее изменения)
 }
