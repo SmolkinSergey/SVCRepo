@@ -10,7 +10,7 @@ namespace UGZ_FSS_Service
 {
     public class Service1 : IUgzFssService
     {
-        public ElectronicInterchangeType SendNotificationEAChanges(NotificationEAChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationEAChanges(NotificationEAChangesType NotificationEAChanges)
         {
             throw new NotImplementedException();
         }
@@ -20,7 +20,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationOKChanges(NotificationOKChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationOKChanges(NotificationOKChangesType NotificationOKChanges)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationEPChanges(NotificationEPChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationEPChanges(NotificationEPChangesType NotificationEPChanges)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationOKDChanges(NotificationOKDChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationOKDChanges(NotificationOKDChangesType NotificationOKDChanges)
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationOKOUChanges(NotificationOKOUChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationOKOUChanges(NotificationOKOUChangesType NotificationOKOUChanges)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationZKChanges(NotificationZKChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationZKChanges(NotificationZKChangesType NotificationZKChanges)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +70,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendNotificationZPChanges(NotificationZPChangesType ContractPayments)
+        public ElectronicInterchangeType SendNotificationZPChanges(NotificationZPChangesType NotificationZPChanges)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-        public ElectronicInterchangeType SendContractTransfers(SendContractTransfersType ContractPayments)
+        public ElectronicInterchangeType SendContractTransfers(SendContractTransfersType SendContractTransfers)
         {
             throw new NotImplementedException();
         }
@@ -90,13 +90,42 @@ namespace UGZ_FSS_Service
             throw new NotImplementedException();
         }
 
-
-        public ElectronicInterchangeType SendCancellationsContract(SendCancellationsContractType ContractPayments)
+        public ElectronicInterchangeType SendCancellationsContract(CancellationsContractType CancellationsContract)
         {
             throw new NotImplementedException();
         }
 
         public CancellationsContractResultsType CancellationsContractResult(ElectronicInterchangeType ElectronicInterchange)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ElectronicInterchangeType SendBankGuarantees(BankGuaranteesType BankGuarantees)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BankGuaranteesResultsType BankGuaranteesResult(ElectronicInterchangeType ElectronicInterchange)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ElectronicInterchangeType SendReturnsFin(ReturnsFinType ReturnsFin)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnsFinResultsType ReturnsFinResult(ElectronicInterchangeType ElectronicInterchange)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ElectronicInterchangeType SendPenaltiesCalculation(PenaltiesCalculationType PenaltiesCalculation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PenaltiesCalculationResultsType PenaltiesCalculationResult(ElectronicInterchangeType ElectronicInterchange)
         {
             throw new NotImplementedException();
         }
